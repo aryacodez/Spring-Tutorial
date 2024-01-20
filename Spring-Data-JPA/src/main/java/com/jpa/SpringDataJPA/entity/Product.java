@@ -1,10 +1,7 @@
 package com.jpa.SpringDataJPA.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,6 +22,7 @@ import java.time.LocalDateTime;
                 )
         }
 )
+@ToString
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "product_generator")
