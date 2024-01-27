@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c0dfe5a-34de-4671-9810-23ed1a55a3de" name="Changes" comment="" />
+    <list default="true" id="2c0dfe5a-34de-4671-9810-23ed1a55a3de" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Spring-Boot/.idea/Spring-Boot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBoot-Proj1-with-DTO/SpringBoot-Proj1-with-DTO.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringBoot-Proj1-with-DTO/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,11 +38,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "F:/Spring-Tutorial/Spring-Data-JPA"
+    "jdk.selected.JAVA_MODULE": "20",
+    "last_opened_file_path": "F:/Spring-Tutorial/SpringBoot-Proj1-with-DTO"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Spring-Tutorial\SpringBoot-Proj1-with-DTO" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
