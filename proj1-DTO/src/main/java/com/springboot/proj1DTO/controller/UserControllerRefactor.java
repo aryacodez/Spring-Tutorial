@@ -1,7 +1,9 @@
 package com.springboot.proj1DTO.controller;
 
+import com.springboot.proj1DTO.dto.UserDto;
 import com.springboot.proj1DTO.entity.User;
 import com.springboot.proj1DTO.service.UserService;
+import com.springboot.proj1DTO.service.UserServiceDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,33 +13,33 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/users")
+@RequestMapping("api/user")
 public class UserControllerRefactor {
 
-    private UserService userService;
+    private UserServiceDto userService;
 
     @PostMapping(path = "/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+        UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/fetch/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id){
-        User fetchUser = userService.getUserById(id);
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id){
+        UserDto fetchUser = userService.getUserById(id);
         return new ResponseEntity<>(fetchUser,HttpStatus.OK);
     }
 
     @GetMapping("/fetch-all")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        List<UserDto> users = userService.getAllUsers();
         return new ResponseEntity<>(users,HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,@RequestBody User user){
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id,@RequestBody UserDto user){
         user.setId(id);
-        User updatedUser = userService.updateUser(user);
+        UserDto updatedUser = userService.updateUser(user);
         return new ResponseEntity<>(updatedUser,HttpStatus.OK);
     }
 
