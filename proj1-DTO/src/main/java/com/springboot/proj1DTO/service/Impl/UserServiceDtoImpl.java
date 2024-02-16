@@ -4,6 +4,8 @@ import com.springboot.proj1DTO.Mapper.AutoUserMapper;
 import com.springboot.proj1DTO.Mapper.UserMapper;
 import com.springboot.proj1DTO.dto.UserDto;
 import com.springboot.proj1DTO.entity.User;
+import com.springboot.proj1DTO.exception.EmailAlreadyExistsException;
+import com.springboot.proj1DTO.exception.ResourceNotFoundException;
 import com.springboot.proj1DTO.repository.UserRepository;
 import com.springboot.proj1DTO.service.UserService;
 import com.springboot.proj1DTO.service.UserServiceDto;
@@ -25,8 +27,12 @@ public class UserServiceDtoImpl implements UserServiceDto {
     public UserDto createUser(UserDto userDto) {
         //convert userDto into User JPA entity
 //        User user1 = UserMapper.mapToUser(userDto);
-
 //        User user1 = modelMapper.map(userDto,User.class);
+
+        Optional<User> optUser =  userRepository.findByEmail(userDto.getEmail());
+        if(optUser.isPresent()){
+            throw new EmailAlreadyExistsException("Email Already exists for the user");
+        }
         User user1 = AutoUserMapper.MAPPER.mapToUser(userDto);
         User savedUser = userRepository.save(user1);
 
@@ -42,11 +48,13 @@ public class UserServiceDtoImpl implements UserServiceDto {
 
     @Override
     public UserDto getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        User user2 = user.get();
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("User","id",id)
+        );
+//        User user2 = user.get();
 //        return UserMapper.mapToUserDto(user2);
 //        return modelMapper.map(user2,UserDto.class);
-        return AutoUserMapper.MAPPER.mapToUserDto(user2);
+        return AutoUserMapper.MAPPER.mapToUserDto(user);
 
 
     }
@@ -62,7 +70,11 @@ public class UserServiceDtoImpl implements UserServiceDto {
 
     @Override
     public UserDto updateUser(UserDto user) {
-        User eusers = userRepository.findById(user.getId()).get();
+//        User eusers = userRepository.findById(user.getId()).get();
+        User eusers = userRepository.findById(user.getId()).orElseThrow(
+                ()->new ResourceNotFoundException("User","id",user.getId())
+        );
+
         eusers.setFirstName(user.getFirstName());
         User updatedUser = userRepository.save(eusers);
 //        return UserMapper.mapToUserDto(updatedUser);
@@ -73,6 +85,9 @@ public class UserServiceDtoImpl implements UserServiceDto {
 
     @Override
     public void deleteUser(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundException("User","id",id)
+        );
         userRepository.deleteById(id);
     }
 }

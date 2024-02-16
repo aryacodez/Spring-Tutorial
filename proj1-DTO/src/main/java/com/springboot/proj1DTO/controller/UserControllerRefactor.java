@@ -2,13 +2,18 @@ package com.springboot.proj1DTO.controller;
 
 import com.springboot.proj1DTO.dto.UserDto;
 import com.springboot.proj1DTO.entity.User;
+import com.springboot.proj1DTO.exception.ErrorDetails;
+import com.springboot.proj1DTO.exception.ResourceNotFoundException;
 import com.springboot.proj1DTO.service.UserService;
 import com.springboot.proj1DTO.service.UserServiceDto;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,7 +24,7 @@ public class UserControllerRefactor {
     private UserServiceDto userService;
 
     @PostMapping(path = "/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto user){
         UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
@@ -37,7 +42,7 @@ public class UserControllerRefactor {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id,@RequestBody UserDto user){
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id,@RequestBody @Valid UserDto user){
         user.setId(id);
         UserDto updatedUser = userService.updateUser(user);
         return new ResponseEntity<>(updatedUser,HttpStatus.OK);
@@ -48,4 +53,7 @@ public class UserControllerRefactor {
         userService.deleteUser(id);
         return new ResponseEntity<>("User successfully deleted",HttpStatus.OK);
     }
+
+
+
 }
