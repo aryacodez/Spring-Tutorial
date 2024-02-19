@@ -1,0 +1,16 @@
+//convert tododto into todojpa entity
+ToDo todo = new ToDo();
+todo.setTitle(toDoDto.getTitle());
+todo.setDescription(toDoDto.getDescription());
+todo.setCompleted(toDoDto.isCompleted());
+
+//ToDo Jpa Entity
+ToDo saved = toDoRepository.save(todo);
+
+//Jpa to Dto
+ToDoDto savedDto = new ToDoDto();
+savedDto.setId(saved.getId());
+savedDto.setTitle(saved.getTitle());
+savedDto.setDescription(saved.getDescription());
+savedDto.setCompleted(saved.isCompleted());
+
