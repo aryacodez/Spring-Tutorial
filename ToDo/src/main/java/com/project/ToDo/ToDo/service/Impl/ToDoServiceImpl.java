@@ -42,4 +42,48 @@ public class ToDoServiceImpl implements ToDoService {
         List<ToDo> todos = toDoRepository.findAll();
         return todos.stream().map((todo)->modelMapper.map(todo,ToDoDto.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public ToDoDto updateToDo(ToDoDto toDoDto, Long id) {
+        ToDo toDo = toDoRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundExeption("Todo not found with id: "+id)
+        );
+        toDo.setTitle(toDoDto.getTitle());
+        toDo.setDescription(toDoDto.getDescription());
+        toDo.setCompleted(toDoDto.isCompleted());
+        ToDo updated = toDoRepository.save(toDo);
+
+        return modelMapper.map(updated, ToDoDto.class);
+    }
+
+    @Override
+    public void deleteToDo(Long id) {
+        ToDo toDo = toDoRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundExeption("Todo not found with id: "+id)
+        );
+
+        toDoRepository.deleteById(id);
+    }
+
+    @Override
+    public ToDoDto completeToDo(Long id) {
+        ToDo toDo = toDoRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundExeption("Todo not found with id: "+id)
+        );
+
+        toDo.setCompleted(Boolean.TRUE);
+
+        ToDo updated = toDoRepository.save(toDo);
+        return modelMapper.map(updated, ToDoDto.class);
+    }
+
+    @Override
+    public ToDoDto incompleteToDo(Long id) {
+        ToDo toDo = toDoRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundExeption("Todo not found with id: "+id)
+        );
+        toDo.setCompleted(Boolean.FALSE);
+        ToDo updated = toDoRepository.save(toDo);
+        return modelMapper.map(updated, ToDoDto.class);
+    }
 }

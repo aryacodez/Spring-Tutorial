@@ -9,4 +9,13 @@ public interface ToDoService {
     ToDoDto getById(Long id);
 
     List<ToDoDto> getAll();
+
+    ToDoDto updateToDo(ToDoDto toDoDto,Long id);
+
+    void deleteToDo(Long id);
+
+    ToDoDto completeToDo(Long id);
+
+    ToDoDto incompleteToDo(Long id);
+
 }

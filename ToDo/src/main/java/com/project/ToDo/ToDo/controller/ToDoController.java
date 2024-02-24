@@ -35,4 +35,28 @@ public class ToDoController {
         return ResponseEntity.ok(todos);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ToDoDto> updatedToDo(@RequestBody ToDoDto toDoDto,@PathVariable Long id){
+        ToDoDto updatedData = toDoService.updateToDo(toDoDto,id);
+        return ResponseEntity.ok(updatedData);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long iid){
+        toDoService.deleteToDo(iid);
+        return ResponseEntity.ok("Deleted Successfully");
+    }
+
+    @PatchMapping("/completed/{id}")
+    public ResponseEntity<ToDoDto> completed(@PathVariable Long id){
+        ToDoDto updated = toDoService.completeToDo(id);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PatchMapping("/incomplete/{id}")
+    public ResponseEntity<ToDoDto> incomplete(@PathVariable Long id){
+        ToDoDto toDoDto = toDoService.incompleteToDo(id);
+        return ResponseEntity.ok(toDoDto);
+    }
+
 }
